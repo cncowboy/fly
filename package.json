@@ -4,6 +4,7 @@
   "main": "node-index.js",
   "browser": "index.js",
   "weapp": "dist/npm/wx.js",
+  "eapp": "dist/npm/my.js",
   "author": {
     "name": "wendux",
     "email": "824783146@qq.com",

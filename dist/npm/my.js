@@ -73,7 +73,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 108);
+/******/ 	return __webpack_require__(__webpack_require__.s = 107);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -3009,55 +3009,58 @@ $export($export.S, 'Promise', { 'try': function (callbackfn) {
 /***/ }),
 /* 99 */,
 /* 100 */,
-/* 101 */,
-/* 102 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-//weex adapter
-var stream = weex.requireModule('stream');
+//阿里小程序适配器
 module.exports = function (request, responseCallback) {
-    if (!request.body) {
-        delete request.body;
-    }
-    stream.fetch(request, function (res) {
-        if (res.ok) {
+    var con = {
+        method: request.method,
+        url: request.url,
+        dataType: request.dataType || undefined,
+        header: request.headers,
+        data: request.body || {},
+        responseType: request.responseType || 'text',
+        success: function success(res) {
             responseCallback({
-                statusCode: res.status,
+                statusCode: res.statusCode,
                 responseText: res.data,
-                headers: res.headers,
-                statusMessage: res.statusText
+                headers: res.header,
+                statusMessage: res.errMsg
             });
-        } else {
+        },
+        fail: function fail(res) {
             responseCallback({
-                statusCode: res.status || 0,
-                statusMessage: res.statusText
+                statusCode: res.statusCode || 0,
+                statusMessage: res.errMsg
             });
         }
-    });
+    };
+    my.httpRequest(con);
 };
 
 /***/ }),
+/* 102 */,
 /* 103 */,
 /* 104 */,
 /* 105 */,
 /* 106 */,
-/* 107 */,
-/* 108 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-//weex entry
-var Fly = __webpack_require__(54);
+//微信小程序入口
+var _Fly = __webpack_require__(54);
 var EngineWrapper = __webpack_require__(53);
-var adapter = __webpack_require__(102);
-var weexEngine = EngineWrapper(adapter);
+var adapter = __webpack_require__(101);
+var myEngine = EngineWrapper(adapter);
 module.exports = function (engine) {
-    return new Fly(engine || weexEngine);
+    return new Fly(engine || myEngine);
 };
 
 /***/ })

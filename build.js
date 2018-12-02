@@ -23,6 +23,7 @@ var plugins=[];
 
 var npmExtra = {
     "wx": "./src/wx.js",
+    "my": "./src/my.js",
     "weex": "./src/weex.js",
     "hap": "./src/hap.js"
 }
@@ -104,5 +105,7 @@ webpack(config,function (err,stats) {
 
 cp("./dist/npm/wx.js", "./miniprogram_dist/index.js")
 cp("./dist/npm/engine-wrapper.js", "./miniprogram_dist/engine-wrapper.js")
+cp("./dist/npm/my.js", "./aliminiprogram_dist/index.js")
+cp("./dist/npm/engine-wrapper.js", "./aliminiprogram_dist/engine-wrapper.js")
 
 

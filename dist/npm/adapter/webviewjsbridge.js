@@ -73,38 +73,18 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 8);
+/******/ 	return __webpack_require__(__webpack_require__.s = 105);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 3:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Add base64 tag, like data:image/img;base64
- * @param responseData
- */
-module.exports = function handleImgBase64Data(responseData) {
-    var headers = responseData.headers || {};
-    var contentType = (headers["content-type"] || headers["Content-Type"] || "").toString().toLowerCase();
-    if (contentType.indexOf("image") !== -1 && responseData.responseText.indexOf("base64") === -1) {
-        responseData.responseText = "data:" + contentType + ";base64," + responseData.responseText;
-    }
-};
-
-/***/ }),
-
-/***/ 8:
+/***/ 105:
 /***/ (function(module, exports, __webpack_require__) {
 
 function KEEP(_,cb){cb();}
 'use strict';
 
-var handleImgBase64Data = __webpack_require__(3);
+var handleImgBase64Data = __webpack_require__(99);
 
 // Reference from  https://github.com/marcuswestin/WebViewJavascriptBridge
 function setupWebViewJavascriptBridge(callback) {
@@ -139,6 +119,26 @@ function adapter(request, responseCallBack) {
 ;
 
 module.exports = adapter;
+
+/***/ }),
+
+/***/ 99:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * Add base64 tag, like data:image/img;base64
+ * @param responseData
+ */
+module.exports = function handleImgBase64Data(responseData) {
+    var headers = responseData.headers || {};
+    var contentType = (headers["content-type"] || headers["Content-Type"] || "").toString().toLowerCase();
+    if (contentType.indexOf("image") !== -1 && responseData.responseText.indexOf("base64") === -1) {
+        responseData.responseText = "data:" + contentType + ";base64," + responseData.responseText;
+    }
+};
 
 /***/ })
 
